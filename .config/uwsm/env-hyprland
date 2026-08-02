@@ -1,0 +1,10 @@
+# Variables HYPR*/AQ_* — con uwsm van acá, no en hyprland.lua ni en ~/.config/uwsm/env
+# https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+
+# AMD (75:00.0 = card1) primero para renderizado principal, Nvidia (01:00.0 = card2) como fallback/offload
+# NOTA: se usan rutas directas /dev/dri/cardN en vez de /dev/dri/by-path/... porque los symlinks
+# by-path causaban que la pantalla no prendiera al arrancar (bug conocido de Aquamarine).
+# Riesgo: en teoría card1/card2 podrían reasignarse en otro boot, pero en la práctica con 2 GPUs
+# fijas en la misma laptop el orden se mantiene estable. Si algún día no prende, revertir borrando
+# este archivo (rm ~/.config/uwsm/env-hyprland) y reiniciar.
+export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card2"
